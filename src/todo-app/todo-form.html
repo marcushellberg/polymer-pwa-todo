@@ -1,0 +1,48 @@
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/vaadin-date-picker/vaadin-date-picker.html">
+
+<dom-module id="todo-form">
+  <template>
+    <style>
+      :host {
+        display: flex;
+      }
+
+      paper-input {
+        flex: 1;
+        padding-right: 5px;
+      }
+
+      vaadin-date-picker {
+        width: 120px;
+      }
+
+      paper-button {
+        align-self: flex-end;
+      }
+    </style>
+    <paper-input label="Task" value="{{todo.task}}"></paper-input>
+    <vaadin-date-picker label="Due date" value="{{todo.due}}"></vaadin-date-picker>
+    <paper-button on-tap="addTodo">Add todo</paper-button>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'todo-form',
+      properties: {
+        todo: {
+          type: Object,
+          value: function() {
+            return {};
+          }
+        }
+      },
+
+      addTodo: function() {
+        this.fire('todo-added', this.todo);
+        this.todo = {};
+      }
+    });
+  </script>
+</dom-module>

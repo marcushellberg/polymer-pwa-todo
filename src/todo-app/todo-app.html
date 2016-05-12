@@ -1,0 +1,75 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="todo-form.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
+
+<dom-module id="todo-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        padding: 24px;
+      }
+
+      vaadin-grid {
+        flex: 1;
+      }
+    </style>
+    <paper-header-panel class="flex">
+      <paper-toolbar>
+        <h1>Todo App</h1>
+      </paper-toolbar>
+      <div class="content">
+        <todo-form></todo-form>
+        <vaadin-grid items="{{todos}}" selection-mode="multi">
+          <table>
+            <colgroup>
+              <col name="task">
+              <col name="due">
+            </colgroup>
+          </table>
+        </vaadin-grid>
+      </div>
+    </paper-header-panel>
+    <iron-localstorage name="todo-storage" value="{{todos}}" on-iron-localstorage-load-empty="initTodos">
+    </iron-localstorage>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'todo-app',
+
+      properties: {
+        todos: {
+          type: Array,
+          value: function() {
+            return [];
+          }
+        }
+      },
+
+      listeners: {
+        'todo-added': 'addTodo'
+      },
+
+      addTodo: function(e) {
+        this.push('todos', e.detail);
+      },
+
+      initTodos: function() {
+        this.todos = [];
+      }
+
+    });
+  </script>
+</dom-module>

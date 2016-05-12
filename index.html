@@ -1,0 +1,31 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <title>todo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="/src/todo-app/todo-app.html">
+  <link rel="import" href="/bower_components/platinum-sw/platinum-sw-cache.html">
+  <link rel="import" href="/bower_components/platinum-sw/platinum-sw-register.html">
+  <link rel="manifest" href="/manifest.json">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: Roboto;
+    }
+  </style>
+</head>
+
+<body>
+  <todo-app></todo-app>
+  <platinum-sw-register auto-register clients-claim skip-waiting>
+    <platinum-sw-cache></platinum-sw-cache>
+  </platinum-sw-register>
+</body>
+
+</html>
